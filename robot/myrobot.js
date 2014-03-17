@@ -113,6 +113,7 @@
     };
     prototype.onHit = function(){
       this.idleCount = 0;
+      this.turn_right(75);
       this.move_forwards(-(Math.random() * 40 + 20));
       this.yell("Oops!");
     };
