@@ -3,22 +3,72 @@
   var MyRobot, tr;
   importScripts('../base-robot.js');
   MyRobot = (function(superclass){
-    var prototype = extend$((import$(MyRobot, superclass).displayName = 'MyRobot', MyRobot), superclass).prototype, constructor = MyRobot;
+    var hit,prototype = extend$((import$(MyRobot, superclass).displayName = 'MyRobot', MyRobot), superclass).prototype, constructor = MyRobot;
+ 	hit = false;
+ 	prototype.Searchright = function(){
+      this.turn_right(15);
+ 	  	 this.turn_turret_right(30);
+      this.move_forwards(30);
+ 	  
+    };
+  	prototype.SearchLeft = function(){
+      this.turn_left(15);
+ 	  	 this.turn_turret_left(30);
+      this.move_forwards(30);
+ 	};	
     prototype.onIdle = function(){
-      this.move_forwards(50);
-      this.turn_turret_left(10);
-      this.turn_right(90);
+      var myAngle, leftDist, rightDist;
+      myAngle = this.me.angle % 360;
+ 	  	if (this.myVarEnemy) {
+ 	  	leftDist = myAngle + 360 - this.myVarEnemy[0].angle;
+        if (leftDist > 360) {
+          leftDist = leftDist - 360;
+        }
+        rightDist = this.myVarEnemy[0].angle - myAngle;
+        if (rightDist < 0) {
+          rightDist = 360 + rightDist;
+        }
+ 	  	if (leftDist !== rightDist) {
+          if (leftDist > rightDist) {
+            this.turn_turret_right(rightDist + 10);
+ 	  	  } else {
+            this.turn_turret_left(leftDist + 10);
+ 	  	  }
+          this.shoot();
+        } else {
+          this.shoot();
+        }
+ 	  	if(hit){
+ 	  	this.turn_left(10);
+ 	  	this.move_forwards(10);
+ 	  	}
+ 	    this.myVarEnemy = undefined;
+ 	   
+ 	  	}
+ 	   else{
+ 	  	 if(hit){
+ 	  	  	 this.Searchright();
+ 	  	  	 hit = false;
+ 	  	 }
+ 	  	 else
+ 	  	  	 this.SearchLeft();
+ 	  	 
+ 	  	 this.yell("Come to DIE!");
+ 	 	}
     };
     prototype.onWallCollide = function(){
       this.move_opposide(10);
-      this.turn_left(90);
+      this.turn_left(60);
     };
     prototype.onHit = function(){
-      this.yell("Oops!");
-    };
-    prototype.onEnemySpot = function(){
-      this.yell("Fire!");
       this.shoot();
+ 	  this.hit = true;
+ 	  this.yell("No! I'm hit!");
+ 	 };
+    prototype.onEnemySpot = function(){
+      this.myVarEnemy = this.enemySpot;
+      this.shoot();
+      this.yell("Die!");
     };
     function MyRobot(){
       MyRobot.superclass.apply(this, arguments);
