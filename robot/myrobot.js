@@ -49,6 +49,7 @@
     var idleCount, prototype = extend$((import$(MyRobot, superclass).displayName = 'MyRobot', MyRobot), superclass).prototype, constructor = MyRobot;
     idleCount = 0;
     prototype.doSearch = function(){
+      this.shoot();
       this.turn_turret_left(45);
       this.turn_left(15);
       this.move_forwards(25);
