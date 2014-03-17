@@ -5,7 +5,10 @@ LiveScript (Javascript) implementation of Robocode. Original from http://gumuz.n
  * I created this project for students in [NCCUCS Software Engineering Course (2014)](http://nccucs-se.github.io/) to learn teamwork in git/github. For more information, please refer to http://nccucs-se.github.io/
  * The final idea is to donate this project to [g0v](http://g0v.tw/), for begineers of open source developers to learn git/github in a fun way.
  * The project is now lack of UI, to fight your own robots, you may need to edit the HTML pages to add your robot scripts to it.
+<<<<<<< HEAD
+=======
  * Currently the copyright of this project is on [Gumuz](http://gumuz.nl/projects/robojs/). Thought I rewrite most of the codes, but the first version of my LiveScript codes are converted from CoffeeScript, which is the work from [Gumuz](http://gumuz.nl/projects/robojs/). I'm still waiting for the Author to provide a source code License.
+>>>>>>> 96ef3808c66197541fd2d4ff00f77c6491ac098a
 
  * Demo: http://youchenlee.github.io/robocode-js/
  * Report issues to https://github.com/youchenlee/robocode-js/issues
@@ -91,5 +94,36 @@ TODO: need more bot actions and callback events
  * OnHit() - When hit by a bullet
  * OnEnemySpot() - When your turret is directly face to an enemy (there seems no reason not to fire!)
 
+
+## Build from LiveScript
+
+ * To compile from LiveScript, first, install `nodejs` from http://nodejs.org/
+ * Second, make sure you got `npm` and `run` command exetable on your console. (If you are on MS Windows, make sure the PATH environment variable is setting correct to run `npm` and `node`)
+ * If you have `make` command, i.e. on Linux or Mac OSX, just go to the repository root directory and type `make`, everything will be done.
+ * If you do not have `make` command, run the following command manually. (haven't test on MS Windows.)
+   * `npm install`
+   * `node_modules/.bin/lsc -c *.ls`
+   * `node_modules/.bin/lsc -c -b log.ls`
+   * `node_modules/.bin/lsc -c robot/*.ls`
+ * Done. Use your browser to open `index.html` file.
+
+## Run directly without compiling anything
+
+ * switch to `gh-pages` branch, you will got everything to run this program.
+
+   `git checkout gh-pages`
+
+## Note
+
+ * google-chrome is not allow to run a web worker of a local javascript file. Please use the `--allow-file-access-from-files` option to start chrome. If you run this project on a web server, this won't be a problem.
+
+## Licensing
+
+ * The first version of my LiveScript codes are converted from CoffeeScript, which is the work from Guyon at  [Gumuz](http://gumuz.nl/projects/robojs/). Guyon has agreed to release this project in a opensource license, but we havn't decide the license yet. It will be likely to be MIT. I'll update later.
+
+ * All the arts in this project are under the Eclipse Public License (EPL).
+
+
 ## Credits
+
 Special thanks to Martain Chen, Tim Chen, BinBin Tasi, Sid Wang, Louh Ren-Shan and 豬大寶 for mathematic support.
